@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Loan Prediction Result</h1>
+
+        <div id="resultBox"></div>
+
+        <div class="confidence-container">
+            <div class="confidence-bar" id="confidenceBar"></div>
+        </div>
+
+        <p id="confidenceText"></p>
+
+        <a href="index.html">
+            <button>Check Another Loan</button>
+        </a>
+
+    </div>
+
+    <script>
+
+        const result = JSON.parse(localStorage.getItem("predictionResult"))
+
+        const resultBox = document.getElementById("resultBox")
+        const confidenceBar = document.getElementById("confidenceBar")
+        const confidenceText = document.getElementById("confidenceText")
+
+        if (result) {
+
+            const probability = result.approval_probability
+            const status = result.status
+
+            let statusText = status === "Approved"
+                ? "Loan Likely Approved"
+                : "Loan Likely Rejected"
+
+            let color = status === "Approved"
+                ? "#4CAF50"
+                : "#f44336"
+
+            resultBox.innerHTML = `
+        <h2 style="color:${color};">${statusText}</h2>
+    `
+
+            confidenceBar.style.width = probability + "%"
+            confidenceBar.style.backgroundColor = color
+
+            confidenceText.innerText = "Approval Confidence: " + probability + "%"
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Loan Approval Predictor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="heading">
+        <h1>Loan Approval Prediction</h1>
+    </div>
+
+    <div class="container">
+
+        <h1>Enter your details</h1>
+
+        <form id="loanForm">
+
+            <label>Number of Dependents</label>
+            <input type="number" id="dependents" required>
+
+            <label>Education (0 = Graduate, 1 = Not Graduate)</label>
+            <input type="number" id="education" required>
+
+            <label>Self Employed (0 = No, 1 = Yes)</label>
+            <input type="number" id="self_employed" required>
+
+            <label>Annual Income</label>
+            <input type="number" id="income_annum" required>
+
+            <label>Loan Amount</label>
+            <input type="number" id="loan_amount" required>
+
+            <label>Loan Term</label>
+            <input type="number" id="loan_term" required>
+
+            <label>CIBIL Score</label>
+            <input type="number" id="cibil_score" required>
+
+            <label>Residential Assets Value</label>
+            <input type="number" id="residential_assets_value" required>
+
+            <label>Commercial Assets Value</label>
+            <input type="number" id="commercial_assets_value" required>
+
+            <label>Luxury Assets Value</label>
+            <input type="number" id="luxury_assets_value" required>
+
+            <label>Bank Asset Value</label>
+            <input type="number" id="bank_asset_value" required>
+
+            <button type="submit">Predict Loan Approval</button>
+
+        </form>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

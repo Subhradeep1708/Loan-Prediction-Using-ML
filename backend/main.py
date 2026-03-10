@@ -3,8 +3,17 @@ from pydantic import BaseModel
 import joblib
 import numpy as np
 import pandas as pd
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # allow frontend
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load trained model
 model = joblib.load("loan_model.pkl")
@@ -46,13 +55,25 @@ def predict(data: LoanRequest):
 
     # print("Features sent to model:", features)
 
+    # prediction = model.predict(features)
+
+    # probability = model.predict_proba(features)[0][1]
+
+    # status = "Approved" if prediction[0] == 1 else "Rejected"
+
+    # return {
+    # "status": status,
+    # "approval_probability": round(probability * 100, 2)
+    # }
     prediction = model.predict(features)
 
-    probability = model.predict_proba(features)[0][1]
+    probs = model.predict_proba(features)[0]
 
-    status = "Approved" if prediction[0] == 1 else "Rejected"
+    approval_probability = probs[0] * 100
+
+    status = "Approved" if prediction[0] == 0 else "Rejected"
 
     return {
-    "status": status,
-    "approval_probability": round(probability * 100, 2)
+        "status": status,
+        "approval_probability": round(approval_probability, 2)
     }
